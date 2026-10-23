@@ -21,6 +21,9 @@ pub(crate) async fn initialize(handle: AppHandle<CefRuntime>) -> Result<()> {
     let device = koharu_ml::device(false);
     let pipeline = koharu_pipeline::Pipeline::load(device)?;
     handle.manage(pipeline.clone());
+    if let Err(error) = crate::web_translation::start(handle.clone()).await {
+        tracing::warn!(%error, "browser manga translation is unavailable");
+    }
 
     let mut resources = pipeline.subscribe_resources();
     let resource_handle = handle.clone();
