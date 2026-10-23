@@ -204,10 +204,11 @@ async fn translate_image(source: Bytes, app: AppHandle<CefRuntime>) -> Result<By
     let renderer = Renderer::new()?;
     let rasterizer = desktop.rasterizer().await?;
     let frame = renderer.render(&snapshot, page).await?;
+    let raster_frame = frame.raster_frame()?;
     let raster = tokio_rayon::spawn(move || {
-        rasterizer.rasterize(&frame.raster_frame()?, RasterOptions::default())
+        rasterizer.rasterize(&raster_frame, RasterOptions::default())
     })
-    .await??;
+    .await;
 
     let encoded = tokio_rayon::spawn(move || -> Result<Vec<u8>> {
         let mut encoded = Vec::new();
@@ -220,7 +221,7 @@ async fn translate_image(source: Bytes, app: AppHandle<CefRuntime>) -> Result<By
             )?;
         Ok(encoded)
     })
-    .await??;
+    .await?;
     if encoded.len() > MAX_OUTPUT_BYTES {
         bail!("translated image exceeds the 32 MB browser response limit");
     }
