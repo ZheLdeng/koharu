@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Koharu Web Reader",
+  "version": "0.1.0",
+  "description": "Translate the visible manga image with Koharu and replace it on the page.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvO5vP3NSUrHJzzAwabW+VT0VxlBvjap+8TGFeFRkskd+95wJ4DvXY0NTNEApxci9CDUMGIQtIP+PU5B7UQrmyDM0BYGjdjdwOaijW06FisqM+r45LJNSzIdakECNqareAOkBFtcn/y+IbJRP0OXmcMbF7YdPNETiWMvVgzhA7risDAEIjd6W1OGEPADfpkV+eV8/d8IRzDTBZ7rptri384gxh2HaPPqlDyK+PcKPx2w2lofSY/z1AREKfUtkIn41dCKNPU7IPz1En76p8XfShhoLC58ERABRC5277iksXhQlt2iDIIuKGOwpbXA/VYKbvF+pWbTJo5GB1ZZ3Qri0nwIDAQAB",
+  "permissions": ["activeTab"],
+  "host_permissions": ["<all_urls>", "http://127.0.0.1:31785/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Translate visible manga image with Koharu",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

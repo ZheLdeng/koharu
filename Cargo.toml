@@ -152,6 +152,9 @@ fast-glob = "1.1.2"
 tar = "0.4.46"
 toktrie = "1.9.1"
 bytes = "1.12.1"
+http-body-util = "0.1.5"
+hyper = { version = "1.11.1", features = ["http1", "server"] }
+hyper-util = { version = "0.1.21", features = ["tokio"] }
 half = "2.7.1"
 js-sys = "0.3.106"
 lazy_static = "1.5.1"

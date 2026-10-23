@@ -15,6 +15,10 @@ alphanumeric-sort = { workspace = true }
 anyhow = { workspace = true }
 async-trait = { workspace = true }
 base64 = { workspace = true }
+bytes = { workspace = true }
+http-body-util = { workspace = true }
+hyper = { workspace = true }
+hyper-util = { workspace = true }
 dirs = { workspace = true }
 futures = { workspace = true }
 hayro = { workspace = true }
