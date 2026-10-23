@@ -208,7 +208,7 @@ async fn translate_image(source: Bytes, app: AppHandle<CefRuntime>) -> Result<By
     let raster = tokio_rayon::spawn(move || {
         rasterizer.rasterize(&raster_frame, RasterOptions::default())
     })
-    .await;
+    .await?;
 
     let encoded = tokio_rayon::spawn(move || -> Result<Vec<u8>> {
         let mut encoded = Vec::new();
